@@ -12,7 +12,7 @@ from features.pages.googleResultsPage import GoogleResultsPage
 
 def before_scenario(context, scenario):
     context.location = "https://yandex.ru"
-    context.browser = webdriver.Chrome('/Users/cberteh/Documents/Python Projects/tz_cbr/features/drivers/chromedriver')
+    context.browser = webdriver.Chrome('/Users/artem/Documents/Pycharm Projects/Test/features/drivers/chromedriver')
     context.browser.get(context.location)
 
     context.googleMainPage = GoogleMainPage(

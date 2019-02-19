@@ -6,16 +6,15 @@ import time
 import os
 
 screenDir = "/Users/cberteh/Documents/Python Projects/tz_cbr/features/screenshots"
-pagesDir = "/Users/cberteh/Documents/Python Projects/tz_cbr/features/pages"
+pagesDir = "/Users/artem/Documents/Pycharm Projects/Test/features/pages"
+
 
 class BasePage(object):
-    def __init__(self, browser, base_url):
+    def __init__(self, browser, url):
         self.browser = browser
-        self.base_url = base_url
+        self.url = url
         self.timeout = 30
         self.implicit_wait = 15
-
-    elementPath = {}
 
     def waitTillSpecificElementIsNotDisplayed(self, element):
         try:
@@ -27,7 +26,6 @@ class BasePage(object):
             raise
 
     def openUrlSite(self, url):
-        a = {"gjfjf" : ("1", "2")}
         self.browser.get("http://" + url)
 
     def setValueInField(self, field, value):
@@ -60,13 +58,3 @@ class BasePage(object):
 
     def makeScreenshot(self):
         self.browser.get_screenshot_as_file(screenDir)
-
-    def findCurrentPageContext(self, element):
-        for page in os.listdir(pagesDir):
-            try:
-                if self.page[0, len(page) - 3].elementPath[element].__class__ == 'tuple':
-                    return page[0, len(page) - 3]
-            except KeyError:
-                pass
-
-

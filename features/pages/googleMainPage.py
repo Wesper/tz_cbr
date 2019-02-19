@@ -5,7 +5,6 @@ from features.pages.basePage import BasePage
 
 class GoogleMainPage(BasePage):
 
-
     url = "https://www.google.com/"
 
     elementPath = {
