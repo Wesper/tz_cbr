@@ -5,7 +5,7 @@ from features.pages.basePage import BasePage
 
 class GoogleResultsPage(BasePage):
 
-    element_path = {
+    elementPath = {
         "cbr.ru": (
             By.XPATH, "//link[@href='https://www.cbr.ru/']")
     }

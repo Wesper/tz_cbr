@@ -6,7 +6,7 @@ from features.pages.basePage import BasePage
 class GoogleMainPage(BasePage):
     url = "https://www.google.com/"
 
-    element_path = {
+    elementPath = {
         "поиск": (
             By.NAME, "q"),
         "поиск в google": (

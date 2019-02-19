@@ -1,9 +1,10 @@
+from nose.tools import assert_equals
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
 
 import time
 
+dirrectory = "/Users/cberteh/Documents/Python Projects/tz_cbr/features/Screenshots"
 
 class BasePage(object):
     def __init__(self, browser, base_url):
@@ -11,8 +12,9 @@ class BasePage(object):
         self.base_url = base_url
         self.timeout = 30
         self.implicit_wait = 15
+        elementPath = {}
 
-    def wait_till_specific_element_is_not_displayed(self, element):
+    def waitTillSpecificElementIsNotDisplayed(self, element):
         try:
             wait = WebDriverWait(self.browser, self.implicit_wait)
             expected_element = EC.visibility_of_element_located(element)
@@ -21,29 +23,37 @@ class BasePage(object):
         except TimeoutError:
             raise
 
-    def set_value_in_field(self, element, value):
-        self.browser.find_element(*self.element_path[element]).send_keys(value)
+    def openUrlSite(self, url):
+        self.browser.get("http://" + url)
 
-    def click_on_element(self, element):
+    def setValueInField(self, field, value):
+        self.browser.find_element(*self.elementPath[field]).send_keys(value)
 
-        self.browser.find_element(*self.element_path[element]).click()
+    def clickOnElement(self, element):
 
-    def get_text_from_element(self, element):
+        self.browser.find_element(*self.elementPath[element]).click()
+
+    def getTextFromElement(self, element):
         try:
-            a = self.browser.find_element(*self.element_path[element])
+            a = self.browser.find_element(*self.elementPath[element])
             time.sleep(1)
         except KeyError:
             print("Element {} does not exist".format(element))
         text = a.text
         return text
 
-    def is_element_exists(self, element):
+    def isElementExists(self, element):
         try:
-            self.browser.find_element(*self.element_path[element])
+            self.browser.find_element(*self.elementPath[element])
             time.sleep(1)
             return 1
         except KeyError:
             print("Element {} does not exist".format(element))
         return 0
 
+    def checUrlOpenSite(self, url):
+        assert_equals(self.browser.url, url)
+
+    def makeScreenshot(self):
+        self.browser.get_screenshot_as_file(dirrectory)
 
