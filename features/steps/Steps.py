@@ -2,6 +2,7 @@ from behave import *
 from nose.tools import assert_false
 
 use_step_matcher("re")
+saved_text =""
 
 
 @given('Зашли на сайт "([^"]*)"')
@@ -47,6 +48,6 @@ def step_impl(context, element):
     return saved_text
 
 
-#@step("Проверили, что текст отличается от запомненного текста ранее")
-#def step_impl(context):
-#    assert_false(saved_text, context.basePage.getTextFromElement())
+@step("Проверили, что текст отличается от запомненного текста ранее")
+def step_impl(context):
+    assert_false(saved_text, context.basePage.getTextFromElement())

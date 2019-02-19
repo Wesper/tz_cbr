@@ -3,8 +3,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 import time
+import os
 
-dirrectory = "/Users/cberteh/Documents/Python Projects/tz_cbr/features/Screenshots"
+screenDir = "/Users/cberteh/Documents/Python Projects/tz_cbr/features/screenshots"
+pagesDir = "/Users/cberteh/Documents/Python Projects/tz_cbr/features/pages"
 
 class BasePage(object):
     def __init__(self, browser, base_url):
@@ -12,7 +14,8 @@ class BasePage(object):
         self.base_url = base_url
         self.timeout = 30
         self.implicit_wait = 15
-        elementPath = {}
+
+    elementPath = {}
 
     def waitTillSpecificElementIsNotDisplayed(self, element):
         try:
@@ -24,6 +27,7 @@ class BasePage(object):
             raise
 
     def openUrlSite(self, url):
+        a = {"gjfjf" : ("1", "2")}
         self.browser.get("http://" + url)
 
     def setValueInField(self, field, value):
@@ -51,9 +55,18 @@ class BasePage(object):
             print("Element {} does not exist".format(element))
         return 0
 
-    def checUrlOpenSite(self, url):
+    def checkUrlOpenSite(self, url):
         assert_equals(self.browser.url, url)
 
     def makeScreenshot(self):
-        self.browser.get_screenshot_as_file(dirrectory)
+        self.browser.get_screenshot_as_file(screenDir)
+
+    def findCurrentPageContext(self, element):
+        for page in os.listdir(pagesDir):
+            try:
+                if self.page[0, len(page) - 3].elementPath[element].__class__ == 'tuple':
+                    return page[0, len(page) - 3]
+            except KeyError:
+                pass
+
 
