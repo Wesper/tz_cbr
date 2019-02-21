@@ -1,13 +1,13 @@
 from selenium import webdriver
 
-from features.pages.basePage import BasePage
-from features.pages.centralBankAboutPage import CentralBankAboutPage
-from features.pages.centralBankIPPage import CentralBankIPPage
-from features.pages.centralBankMainPage import CentralBankMainPage
-from features.pages.centralBankWTPage import CentralBankWTPage
-from features.pages.centralBankWarningPage import CentralBankWarningPage
-from features.pages.googleMainPage import GoogleMainPage
-from features.pages.googleResultsPage import GoogleResultsPage
+from features.pages.BasePage import BasePage
+from features.pages.CentralBankAboutPage import CentralBankAboutPage
+from features.pages.CentralBankIPPage import CentralBankIPPage
+from features.pages.CentralBankMainPage import CentralBankMainPage
+from features.pages.CentralBankWTPage import CentralBankWTPage
+from features.pages.CentralBankWarningPage import CentralBankWarningPage
+from features.pages.GoogleMainPage import GoogleMainPage
+from features.pages.GoogleResultsPage import GoogleResultsPage
 
 
 def before_scenario(context, scenario):
@@ -15,19 +15,19 @@ def before_scenario(context, scenario):
     context.browser = webdriver.Chrome('/Users/artem/Documents/Pycharm Projects/Test/features/drivers/chromedriver')
     context.browser.get(context.location)
 
-    context.googleMainPage = GoogleMainPage(
+    context.GoogleMainPage = GoogleMainPage(
         context.browser, context.location)
-    context.googleResultsPage = GoogleResultsPage(
+    context.GoogleResultsPage = GoogleResultsPage(
         context.browser, context.location)
-    context.basePage = BasePage(
+    context.BasePage = BasePage(
         context.browser, context.location)
-    context.centralBankAboutPage = CentralBankAboutPage(
+    context.CentralBankAboutPage = CentralBankAboutPage(
         context.browser, context.location)
-    context.centralBankIPPage = CentralBankIPPage(
+    context.CentralBankIPPage = CentralBankIPPage(
         context.browser, context.location)
-    context.centralBankMainPage = CentralBankMainPage(
+    context.CentralBankMainPage = CentralBankMainPage(
         context.browser, context.location)
-    context.centralBankWarningPage = CentralBankWarningPage(
+    context.CentralBankWarningPage = CentralBankWarningPage(
         context.browser, context.location)
-    context.centralBankWTPage = CentralBankWTPage(
+    context.CentralBankWTPage = CentralBankWTPage(
         context.browser, context.location)

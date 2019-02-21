@@ -1,10 +1,11 @@
 from selenium.webdriver.common.by import By
 
-from features.pages.basePage import BasePage
+from features.pages.BasePage import BasePage
 
 
 class GoogleMainPage(BasePage):
 
+    base_url = ""
     url = "https://www.google.com/"
 
     elementPath = {

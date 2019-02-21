@@ -10,9 +10,9 @@ pagesDir = "/Users/artem/Documents/Pycharm Projects/Test/features/pages"
 
 
 class BasePage(object):
-    def __init__(self, browser, url):
+    def __init__(self, browser, base_url):
         self.browser = browser
-        self.url = url
+        self.base_url = base_url
         self.timeout = 30
         self.implicit_wait = 15
 

@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 
-from features.pages.basePage import BasePage
+from features.pages.BasePage import BasePage
 
 
 class CentralBankIPPage(BasePage):

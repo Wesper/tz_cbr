@@ -1,49 +1,27 @@
 from behave import *
 from nose.tools import assert_false
 
-from features.pages.centralBankAboutPage import CentralBankAboutPage
-from features.pages.centralBankIPPage import CentralBankIPPage
-from features.pages.centralBankMainPage import CentralBankMainPage
-from features.pages.centralBankWTPage import CentralBankWTPage
-from features.pages.centralBankWarningPage import CentralBankWarningPage
-from features.pages.googleMainPage import GoogleMainPage
-from features.pages.googleResultsPage import GoogleResultsPage
+from features.steps.NeededPage import neededPage
 
 use_step_matcher("re")
 saved_text =""
 
-def contextPage(context, field):
-    if str(context.googleMainPage.elementPath).find(field) != -1:
-        return GoogleMainPage(context, url="")
-    elif str(context.googleResultsPage.elementPath).find(field) != -1:
-        return GoogleResultsPage(context)
-    elif str(context.centralBankAboutPage.elementPath).find(field) != -1:
-        return CentralBankAboutPage(context)
-    elif str(context.centralBankIPPage.elementPath).find(field) != -1:
-        return CentralBankIPPage(context)
-    elif str(context.centralBankMainPage.elementPath).find(field) != -1:
-        return CentralBankMainPage(context)
-    elif str(context.centralBankWarningPage.elementPath).find(field) != -1:
-        return CentralBankWarningPage(context)
-    elif str(context.centralBankWTPage.elementPath).find(field) != -1:
-        return CentralBankWTPage(context)
 
 @given('Зашли на сайт "([^"]*)"')
-def step_impl(context, url):
-    context.basePage.openUrlSite(url)
+def step_impl(context, arg):
+    neededPage(context, arg).openUrlSite(arg)
 
 
 @step('Нашли ссылку "([^"]*)"')
 @step('Проверили, что появилось поле "([^"]*)"')
-def step_impl(context, field):
-    page = contextPage(context, field)
-    page.isElementExists(field)
+def step_impl(context, arg):
+    neededPage(context, arg).isElementExists(arg)
 
 
 @step('В поле "([^"]*)" ввели значение "([^"]*)"')
 @step('Ввели в поле "([^"]*)" значение "([^"]*)"')
-def step_impl(context, field, value):
-    context.basePage.setValueInField(field, value)
+def step_impl(context, arg1, arg2):
+    neededPage(context, arg1).setValueInField(arg1, arg2)
 
 
 @step('Сменили язык страницы на "([^"]*)"')
@@ -52,8 +30,8 @@ def step_impl(context, field, value):
 @step('Открыли раздел "([^"]*)"')
 @step('Нажали на ссылку "([^"]*)"')
 @step('Нажали на кнопку "([^"]*)"')
-def step_impl(context, element):
-    context.basePage.clickOnElement(element)
+def step_impl(context, arg):
+    neededPage(context, arg).clickOnElement(arg)
 
 
 @step("Проверили, что открыт нужный сайт")
@@ -67,8 +45,8 @@ def step_impl(context):
 
 
 @step('Запомнили текст "([^"]*)"')
-def step_impl(context, element):
-    saved_text = context.basePage.getTextFromElement(element)
+def step_impl(context, arg):
+    saved_text = neededPage(context, arg).getTextFromElement(arg)
     return saved_text
 
 
