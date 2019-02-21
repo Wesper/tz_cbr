@@ -1,6 +1,6 @@
 from selenium import webdriver
 
-from features.pages.BasePage import BasePage
+from features.pages.BasePageObj import BasePage
 from features.pages.CentralBankAboutPage import CentralBankAboutPage
 from features.pages.CentralBankIPPage import CentralBankIPPage
 from features.pages.CentralBankMainPage import CentralBankMainPage

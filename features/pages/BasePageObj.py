@@ -16,6 +16,8 @@ class BasePage(object):
         self.timeout = 30
         self.implicit_wait = 15
 
+    pageName = "Базовая страница"
+
     def waitTillSpecificElementIsNotDisplayed(self, element):
         try:
             wait = WebDriverWait(self.browser, self.implicit_wait)
@@ -32,7 +34,7 @@ class BasePage(object):
         self.browser.find_element(*self.elementPath[field]).send_keys(value)
 
     def clickOnElement(self, element):
-
+        time.sleep(1)
         self.browser.find_element(*self.elementPath[element]).click()
 
     def getTextFromElement(self, element):

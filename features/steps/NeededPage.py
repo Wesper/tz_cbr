@@ -6,37 +6,20 @@ from features.pages.CentralBankWarningPage import CentralBankWarningPage
 from features.pages.GoogleMainPage import GoogleMainPage
 from features.pages.GoogleResultsPage import GoogleResultsPage
 
+class NeededPage(object):
 
-def sdsdsd(context, field):
-    if str(context.googleMainPage.elementPath).find(field) != -1:
-        return GoogleMainPage(context.browser, context.browser.current_url)
-    elif str(context.googleResultsPage.elementPath).find(field) != -1:
-        return GoogleResultsPage(context.browser, context.browser.current_url)
-    elif str(context.centralBankAboutPage.elementPath).find(field) != -1:
-        return CentralBankAboutPage(context.browser, context.browser.current_url)
-    elif str(context.centralBankIPPage.elementPath).find(field) != -1:
-        return CentralBankIPPage(context.browser, context.browser.current_url)
-    elif str(context.centralBankMainPage.elementPath).find(field) != -1:
-        return CentralBankMainPage(context.browser, context.browser.current_url)
-    elif str(context.centralBankWarningPage.elementPath).find(field) != -1:
-        return CentralBankWarningPage(context.browser, context.browser.current_url)
-    elif str(context.centralBankWTPage.elementPath).find(field) != -1:
-        return CentralBankWTPage(context.browser, context.browser.current_url)
-
-
-
-def neededPage(context, field):
-    if str(context.GoogleMainPage.elementPath).find(field) != -1:
-        return GoogleMainPage(context.browser, context.browser.current_url)
-    elif str(context.GoogleResultsPage.elementPath).find(field) != -1:
-        return GoogleResultsPage(context.browser, context.browser.current_url)
-    elif str(context.CentralBankAboutPage.elementPath).find(field) != -1:
-        return CentralBankAboutPage(context.browser, context.browser.current_url)
-    elif str(context.CentralBankIPPage.elementPath).find(field) != -1:
-        return CentralBankIPPage(context.browser, context.browser.current_url)
-    elif str(context.CentralBankMainPage.elementPath).find(field) != -1:
-        return CentralBankMainPage(context.browser, context.browser.current_url)
-    elif str(context.CentralBankWarningPage.elementPath).find(field) != -1:
-        return CentralBankWarningPage(context.browser, context.browser.current_url)
-    elif str(context.CentralBankWTPage.elementPath).find(field) != -1:
-        return CentralBankWTPage(context.browser, context.browser.current_url)
+    def NeededPage(self, field):
+        if self.GoogleMainPage.pageName.lower() == field.lower():
+            return GoogleMainPage(self.browser, self.browser.current_url)
+        elif self.GoogleResultsPage.pageName.lower() == field.lower():
+            return GoogleResultsPage(self.browser, self.browser.current_url)
+        elif self.CentralBankAboutPage.pageName.lower() == field.lower():
+            return CentralBankAboutPage(self.browser, self.browser.current_url)
+        elif self.CentralBankIPPage.pageName.lower() == field.lower():
+            return CentralBankIPPage(self.browser, self.browser.current_url)
+        elif self.CentralBankMainPage.pageName.lower() == field.lower():
+            return CentralBankMainPage(self.browser, self.browser.current_url)
+        elif self.CentralBankWarningPage.pageName.lower() == field.lower():
+            return CentralBankWarningPage(self.browser, self.browser.current_url)
+        elif self.CentralBankWTPage.pageName.lower() == field.lower():
+            return CentralBankWTPage(self.browser, self.browser.current_url)

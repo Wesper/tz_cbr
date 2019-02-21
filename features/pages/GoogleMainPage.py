@@ -1,9 +1,11 @@
 from selenium.webdriver.common.by import By
 
-from features.pages.BasePage import BasePage
+from features.pages.BasePageObj import BasePage
 
 
 class GoogleMainPage(BasePage):
+
+    pageName = "поиска"
 
     base_url = ""
     url = "https://www.google.com/"

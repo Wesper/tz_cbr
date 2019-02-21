@@ -1,55 +1,62 @@
 from behave import *
 from nose.tools import assert_false
 
-from features.steps.NeededPage import neededPage
+from features.steps.NeededPage import NeededPage
 
 use_step_matcher("re")
-saved_text =""
-
+saved_text = None
+page = None
 
 @given('Зашли на сайт "([^"]*)"')
 def step_impl(context, arg):
-    neededPage(context, arg).openUrlSite(arg)
+    context.BasePage.openUrlSite(arg)
 
 
 @step('Нашли ссылку "([^"]*)"')
 @step('Проверили, что появилось поле "([^"]*)"')
 def step_impl(context, arg):
-    neededPage(context, arg).isElementExists(arg)
+    page.isElementExists(arg)
 
 
 @step('В поле "([^"]*)" ввели значение "([^"]*)"')
 @step('Ввели в поле "([^"]*)" значение "([^"]*)"')
 def step_impl(context, arg1, arg2):
-    neededPage(context, arg1).setValueInField(arg1, arg2)
+    page.setValueInField(arg1, arg2)
 
 
 @step('Сменили язык страницы на "([^"]*)"')
 @step('Нажали на раздел "([^"]*)"')
 @step('Поставили галочку "([^"]*)"')
-@step('Открыли раздел "([^"]*)"')
+@step('(?:Открыли|Выбрали) раздел "([^"]*)"')
 @step('Нажали на ссылку "([^"]*)"')
 @step('Нажали на кнопку "([^"]*)"')
 def step_impl(context, arg):
-    neededPage(context, arg).clickOnElement(arg)
+    page.clickOnElement(arg)
 
 
-@step("Проверили, что открыт нужный сайт")
+@step('Проверили, что открыт нужный сайт')
 def step_impl(context):
     context.basePage.checUrlOpenSite(context.centralBankMainPage.url)
 
 
-@step("Сделали скриншот")
+@step('Сделали скриншот')
 def step_impl(context):
     context.basePage.makeScreenshot()
 
 
 @step('Запомнили текст "([^"]*)"')
 def step_impl(context, arg):
-    saved_text = neededPage(context, arg).getTextFromElement(arg)
-    return saved_text
+    global saved_text
+    saved_text = page.getTextFromElement(arg)
 
 
-@step("Проверили, что текст отличается от запомненного текста ранее")
-def step_impl(context):
-    assert_false(saved_text, context.basePage.getTextFromElement())
+@step('Проверили, что текст "([^"]*)" отличается от запомненного текста ранее')
+def step_impl(context, arg):
+    assert_false(saved_text, page.getTextFromElement(arg))
+
+@step('(?:Открывается|Открылась)? (.*) страница')
+@step('(?:Открывается|Открылась) страница? (.*)')
+@step('Пользователь находится на странице? (.*)')
+def step_impl(context, arg):
+    global page
+    page = NeededPage.NeededPage(context, arg)
