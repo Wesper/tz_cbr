@@ -15,5 +15,5 @@ class CentralBankWTPage(BasePage):
         "Три полоски": (
             By.CLASS_NAME, "burger"),
         "О сайте": (
-            By.XPATH, "//a[@href='/About/']")
+            By.XPATH, "//li/a[@href='/About/' and @class='pseudo']")
     }

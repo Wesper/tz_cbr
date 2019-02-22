@@ -9,5 +9,5 @@ class CentralBankAboutPage(BasePage):
 
     elementPath = {
         "Предупреждение": (
-            By.XPATH, "//a[text*()='Предупреждение']")
+            By.XPATH, "//a[text()='Предупреждение']")
     }

@@ -9,5 +9,5 @@ class GoogleResultsPage(BasePage):
 
     elementPath = {
         "cbr.ru": (
-            By.XPATH, "//link[@href='https://www.cbr.ru/']")
+            By.XPATH, "//a[@href='https://www.cbr.ru/']")
     }

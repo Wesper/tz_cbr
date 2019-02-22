@@ -5,7 +5,7 @@ from features.pages.BasePageObj import BasePage
 
 class CentralBankWarningPage(BasePage):
 
-    pageName = "Предупреждения"
+    pageName = "Предупреждение"
 
     elementPath = {
         "Предупреждения": (

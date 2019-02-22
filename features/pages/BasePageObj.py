@@ -1,12 +1,21 @@
+import os
+from email.mime.base import MIMEBase
+from email.mime.image import MIMEImage
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 from nose.tools import assert_equals
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 import time
-import os
+import smtplib
 
-screenDir = "/Users/cberteh/Documents/Python Projects/tz_cbr/features/screenshots"
-pagesDir = "/Users/artem/Documents/Pycharm Projects/Test/features/pages"
+screenDir = "/Users/cberteh/Documents/Python Projects/tz_cbr/features/screenshots/"
+screenName = 1
+addr_from = ""
+password = ""
+addr_to = ""
 
 
 class BasePage(object):
@@ -56,7 +65,35 @@ class BasePage(object):
         return 0
 
     def checkUrlOpenSite(self, url):
-        assert_equals(self.browser.url, url)
+        assert_equals(self.browser.current_url, url)
 
     def makeScreenshot(self):
-        self.browser.get_screenshot_as_file(screenDir)
+        global screenDir
+        global screenName
+        self.browser.get_screenshot_as_file(screenDir + str(screenName) + ".png")
+        screenName += 1
+
+    def sendEmailAndDeleteScreenshons(self):
+        global screenName
+        screenNameLocal = screenName
+        msg = MIMEMultipart()
+        msg['From'] = addr_from
+        msg['TO'] = addr_to
+        msg['Subject'] = 'Test screenshots'
+
+        body = "Test screenshots attachments"
+        msg.attach(MIMEText(body, 'plain'))
+
+        while screenNameLocal > 1:
+            screenNameLocal -= 1
+            file = open(screenDir + str(screenNameLocal) + ".png", "rb")
+            attach = MIMEImage(file.read())
+            attach.add_header('Content-Disposition', 'attachment; filename="%s"' % screenNameLocal)
+            file.close()
+            msg.attach(attach)
+            os.remove(screenDir + str(screenNameLocal) + ".png")
+
+        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+        server.login(addr_from, password)
+        server.send_message(msg)
+        server.quit()

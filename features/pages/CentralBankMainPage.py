@@ -4,7 +4,9 @@ from features.pages.BasePageObj import BasePage
 
 
 class CentralBankMainPage(BasePage):
-    url = "http://cbr.ru/"
+
+    url = "https://www.cbr.ru/"
+
     pageName = "Главная"
 
     elementPath = {

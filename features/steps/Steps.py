@@ -1,5 +1,5 @@
 from behave import *
-from nose.tools import assert_false
+from nose.tools import assert_not_equal
 
 from features.steps.NeededPage import NeededPage
 
@@ -36,12 +36,12 @@ def step_impl(context, arg):
 
 @step('Проверили, что открыт нужный сайт')
 def step_impl(context):
-    context.basePage.checUrlOpenSite(context.centralBankMainPage.url)
+    context.BasePage.checkUrlOpenSite(page.url)
 
 
 @step('Сделали скриншот')
 def step_impl(context):
-    context.basePage.makeScreenshot()
+    context.BasePage.makeScreenshot()
 
 
 @step('Запомнили текст "([^"]*)"')
@@ -52,7 +52,7 @@ def step_impl(context, arg):
 
 @step('Проверили, что текст "([^"]*)" отличается от запомненного текста ранее')
 def step_impl(context, arg):
-    assert_false(saved_text, page.getTextFromElement(arg))
+    assert_not_equal(saved_text, page.getTextFromElement(arg))
 
 @step('(?:Открывается|Открылась)? (.*) страница')
 @step('(?:Открывается|Открылась) страница? (.*)')
@@ -60,3 +60,8 @@ def step_impl(context, arg):
 def step_impl(context, arg):
     global page
     page = NeededPage.NeededPage(context, arg)
+
+
+@step("Отправили письмо и удалили скриншоты")
+def step_impl(context):
+    context.BasePage.sendEmailAndDeleteScreenshons()
